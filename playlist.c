@@ -53,7 +53,7 @@ void delete (struct song_node* x , struct song_node table[27]){
   }
   remove_song(x,&table[num]);
 }
-void print_letter (char *letter){
+void print_letter (char *letter, struct song_node table[27]){
   char a= letter[0];
   int num = 0;
   if (a >= 'a' && a <= 'z'){
@@ -62,42 +62,45 @@ void print_letter (char *letter){
   else{
     num = 26;
   }
-  print_list(table[num]);
+  print_list(&table[num]);
 }
-void print_artist (char * art){
+
+void print_artist (char * art, struct song_node table[27]){
+  char letter = art[0];
+  int num;
   if (letter >= 'a' && letter <= 'z'){
     num = letter - 'a';
   }
   else{
     num = 26;
   }
-  struct song_node * pointer = first_song(art, table[num]);
-  struct song_node * artist_songs[];
+  struct song_node * pointer = first_song(art,& table[num]);
+  struct song_node * artist_songs;
   while(strcmp(pointer->artist, art)){
     artist_songs.insert_order(pointer);
-    pointer ->next;
+    pointer -> next;
   }
   print_list(artist_songs);
 
 }
-void print_library (){
-  for(char i = a; i<z; i++){
+void print_library (struct song_node table[27]){
+  for(char i = 'a'; i<'z'; i++){
   print_letter(table,i);
 }
   print_letter(table,'?');
 }
-void shuffle (struct song_node[27]){
+void shuffle ( struct song_node table[27]){
   srand(time(NULL));
   int num = rand() % 27;
-  random_song(table[num]);
+  random_song(&table[num]);
   int num1 = rand() % 27;
-  random_song(table[num1]);
+  random_song(&table[num1]);
   int num2 = rand() % 27;
-  random_song(table[num2]);
+  random_song(&table[num2]);
 }
-void clear (struct song_node[27]){
-  for(char i = a; i<z; i++){
-  free_list(table,i);
+void clear (struct song_node table[27]){
+  for(char i = 'a'; i<'z'; i++){
+  free_list(&table[i]);
 }
   free_list(table,'?');
 }
