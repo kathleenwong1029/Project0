@@ -77,17 +77,18 @@ void print_artist (char * art, struct song_node table[27]){
   struct song_node * pointer = first_song(art,& table[num]);
   struct song_node * artist_songs;
   while(strcmp(pointer->artist, art)){
-    artist_songs.insert_order(pointer);
-    pointer -> next;
+    insert_order(pointer,artist_songs);
+    pointer = pointer -> next;
   }
   print_list(artist_songs);
 
 }
 void print_library (struct song_node table[27]){
-  for(char i = 'a'; i<'z'; i++){
-  print_letter(table,i);
+  for(char i = 'a'; i<= 'z'; i++){
+  print_letter(&i,table);
 }
-  print_letter(table,'?');
+  char x = '?';
+  print_letter(&x,table);
 }
 void shuffle ( struct song_node table[27]){
   srand(time(NULL));
@@ -102,5 +103,5 @@ void clear (struct song_node table[27]){
   for(char i = 'a'; i<'z'; i++){
   free_list(&table[i]);
 }
-  free_list(table,'?');
+  free_list(&table[26]);
 }
