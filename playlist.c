@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "playlist.h"
-void add(struct song_node* x){
-  char art[100]= x->artist;
+#include "linked_list.c"
+void add(struct song_node * x,struct song_node table[27]){
+  char art[100];
+  strcpy(art, x->artist);
   char letter = art[0];
   int num;
   if (letter >= 'a' && letter <= 'z'){
@@ -12,10 +14,10 @@ void add(struct song_node* x){
   else{
     num = 26;
   }
-  insert_order(x,table[num]) ;
+  insert_order(x, &table[num]) ;
 }
 
-struct song_node * search_song(char * art, char *song){
+struct song_node * search_song(char * art, char *song, struct song_node table[27]){
   char letter = art[0];
   int num;
   if (letter >= 'a' && letter <= 'z'){
@@ -24,11 +26,11 @@ struct song_node * search_song(char * art, char *song){
   else{
     num = 26;
   }
-  return return_song(art, song, table[num]);
+  return return_song(art, song, &table[num]);
 }
 
-struct song_node * search_artist(, char * art){
-  char letter = art[0];
+struct song_node * search_artist( char * a, struct song_node table[27]){
+  char letter= a[0];
   int num;
   if (letter >= 'a' && letter <= 'z'){
     num = letter - 'a';
@@ -36,10 +38,11 @@ struct song_node * search_artist(, char * art){
   else{
     num = 26;
   }
-  return first_song(art,table[num]);
+  return first_song(a,&table[num]);
 }
-void delete (struct song_node* x){
-  char [] art = x->artist;
+void delete (struct song_node* x , struct song_node table[27]){
+  char art[100];
+  strcpy(art, x->artist);
   char letter = art[0];
   int num;
   if (letter >= 'a' && letter <= 'z'){
@@ -48,11 +51,13 @@ void delete (struct song_node* x){
   else{
     num = 26;
   }
-  remove_song(x,table[num]);
+  remove_song(x,&table[num]);
 }
 void print_letter (char *letter){
-  if (letter >= 'a' && letter <= 'z'){
-    num = letter - 'a';
+  char a= letter[0];
+  int num = 0;
+  if (a >= 'a' && a <= 'z'){
+    num = a - 'a';
   }
   else{
     num = 26;
