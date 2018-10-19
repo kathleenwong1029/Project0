@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "playlist.h"
-#include "linked_list.c"
+#include "linked_list.h"
 void add(struct song_node * x,struct song_node table[27]){
   char art[100];
   strcpy(art, x->artist);
