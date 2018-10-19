@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include <time.h>
 #include "linked_list.h"
 
+struct song_node * create_node( char * song, char * art){
+  struct song_node * new = malloc(sizeof(struct song_node));
+  strcpy(new->name, song);
+  strcpy(new->artist, art);
+  return new;
+}
 
 void print_list(struct song_node * currentNode){
   while(currentNode){
@@ -13,10 +20,10 @@ void print_list(struct song_node * currentNode){
 }
 
 struct song_node * insert_front(struct song_node * root, struct song_node * add){
-  add = (struct song_node *)malloc(sizeof(struct song_node));
   add -> next = root;
   return add;
 }
+
 void insert_order(struct song_node * add, struct song_node *root){
   insert_front(root,add);
   struct song_node * nextone = root;
@@ -35,7 +42,7 @@ void free_list(struct song_node *root ){
   }
 }
 
-struct song_node * return_song(char*a, char*s,struct song_node * root){
+struct song_node * return_song(char* a, char* s,struct song_node * root){
   struct song_node *cur = root;
   while(cur){
     if (strcmp(cur->artist,a) == 0){
