@@ -54,8 +54,8 @@ void delete (struct song_node* x , struct song_node table[27]){
   }
   remove_song(x,&table[num]);
 }
-void print_letter (char *letter, struct song_node table[27]){
-  char a= letter[0];
+void print_letter (char letter, struct song_node table[27]){
+  char a= letter;
   int num = 0;
   if (a >= 'a' && a <= 'z'){
     num = a - 'a';
@@ -86,10 +86,10 @@ void print_artist (char * art, struct song_node table[27]){
 }
 void print_library (struct song_node table[27]){
   for(char i = 'a'; i<= 'z'; i++){
-  print_letter(&i,table);
+  print_letter(i,table);
 }
   char x = '?';
-  print_letter(&x,table);
+  print_letter(x,table);
 }
 void shuffle ( struct song_node table[27]){
   srand(time(NULL));

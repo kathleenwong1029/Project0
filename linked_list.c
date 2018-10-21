@@ -13,8 +13,11 @@ struct song_node * create_node( char * song, char * art){
 }
 
 void print_list(struct song_node * currentNode){
+  if (currentNode == NULL){
+    printf("NULL");
+  }
   while(currentNode){
-    printf("%s : %s ", currentNode->name, currentNode->artist);
+    printf("%s by artist %s \n", currentNode->name, currentNode->artist);
     currentNode = currentNode->next;
   }
 }
@@ -24,13 +27,29 @@ struct song_node * insert_front(struct song_node * root, struct song_node * add)
   return add;
 }
 
-void insert_order(struct song_node * add, struct song_node *root){
-  insert_front(root,add);
-  struct song_node * nextone = root;
-  while(strcmp(add->name,nextone->name) > 0){
-    nextone = nextone -> next;
-    add->next = nextone;
+struct song_node* insert_order(struct song_node * add, struct song_node *root){
+  if(add == NULL || strcmp(add -> artist,root->artist) < 0){
+    return insert_front(root,add);
   }
+  struct song_node * cur = root;
+  struct song_node * prev;
+  while(cur != NULL && strcmp(add->artist,cur->artist) > 0){
+    prev = cur;     //bob
+    cur = cur->next;//null
+  }
+  if(strcmp(add->artist,cur->artist) == 0){
+    if (strcmp(add->name,cur->name) > 0){
+      return insert_front(add,cur);
+    }
+  }
+  if(cur == NULL){
+    prev->next = add; //bob->bozee
+    add->next = cur;  //bozee->NULL
+    return root;
+  }
+  add -> next = prev-> next;//bozee ->null
+  prev -> next = add;//bob->bozee
+  return root;
 }
 
 void free_list(struct song_node *root ){
