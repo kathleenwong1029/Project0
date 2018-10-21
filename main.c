@@ -10,6 +10,7 @@ int main(){
   struct song_node *bozee = create_node("dapper","bozee");
   //print_list(bob);
   struct song_node table[27];
+  printf("Testing linked list functions:\n");
   printf("testing print_list:\n");
   print_list(bee);
   printf("testing insert_front:\n");
