@@ -13,19 +13,19 @@ int main(){
   printf("Testing linked list functions:\n");
   printf("testing print_list:\n");
   print_list(bee);
-  printf("testing insert_front:\n");
-  insert_front(bob,bee);
-  print_list(bee);
+  printf("testing insert_front by adding node bob to front:\n");
+  insert_front(bee,bob);
+  print_list(bob);
 
   //print_list(bozee);
-  printf("testing insert_order:\n");
-  insert_order(bozee,bee);
-  print_list(bee);
+  printf("testing insert_order by adding node bozee:\n");
+  insert_order(bozee,bob);
+  print_list(bob);
   //testing return_song
   printf("testing random_song:\n");
-  print_list(random_song(bee));
+  print_node(random_song(bob));
   printf("testing return_song:\n");
-  print_list(return_song("bob","wow",bee));
+  print_node(return_song("bozee","dapper",bob));
 
 
 

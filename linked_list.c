@@ -12,6 +12,10 @@ struct song_node * create_node( char * song, char * art){
   return new;
 }
 
+void print_node(struct song_node * currentNode){
+  printf("%s by artist %s \n", currentNode->name, currentNode->artist);
+}
+
 void print_list(struct song_node * currentNode){
   if (currentNode == NULL){
     printf("NULL");
