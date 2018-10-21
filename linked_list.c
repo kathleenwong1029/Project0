@@ -31,23 +31,36 @@ struct song_node* insert_order(struct song_node * add, struct song_node *root){
   if(root == NULL || strcmp(add -> artist,root->artist) < 0){
     return insert_front(root,add);
   }
+  if(strcmp(add->artist,root->artist)==0){
+    if(strcmp(add->name,root->name) < 0){
+      insert_front(root,add);
+      return add;
+    }
+  }
+
   struct song_node * cur = root;
 
   while((cur->next) && strcmp(add->artist,cur->artist) > 0){
-    cur = cur->next;//null
+    cur = cur->next;
   }
-
+  if(strcmp(add->artist,cur->artist)==0){
+    if(strcmp(add->name,cur->name) < 0){
+      insert_front(cur,add);
+      return root;
+    }
+  }
   cur->next = insert_front(cur->next,add);
   return root;
 }
 
-void free_list(struct song_node *root ){
+struct song_node * free_list(struct song_node *root ){
   struct song_node * pointer;
   while(root){
     pointer = root->next;
     free(root);
     root = pointer;
   }
+  return root;
 }
 
 struct song_node * return_song(char* a, char* s,struct song_node * root){
@@ -93,7 +106,10 @@ struct song_node * random_song(struct song_node *root){
   }
   return cur;
 }
-void remove_song(struct song_node *rem, struct song_node *root){
+struct song_node * remove_song(struct song_node *rem, struct song_node *root){
+  if (root == rem){
+    return rem->next;
+  }
   struct song_node *cur = root;
   struct song_node *prev;
   while(rem != cur && cur){
@@ -101,9 +117,7 @@ void remove_song(struct song_node *rem, struct song_node *root){
     cur = cur->next;
 
   }
-  if (cur == root){
-    root = cur->next;
-  }
   prev->next = cur->next;
+  return root;
 }
 //struct song_node * table[27];
